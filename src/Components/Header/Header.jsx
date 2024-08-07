@@ -9,7 +9,6 @@ import Logo from '../Logo';
 function Header() {
     const authstatus = useSelector((state) => state.auth.status);
     const currentUser = useSelector((state) => (state.auth.userdata));
-    console.log("hey bro",authstatus, currentUser);
     
     const navigate = useNavigate();
     const location = useLocation();

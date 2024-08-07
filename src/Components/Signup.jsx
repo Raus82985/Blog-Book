@@ -19,10 +19,16 @@ function Signup() {
         setError("")
         try {
             const newuserdata = await authservice.createaccount(data.email, data.password, data.name)
-            console.log("signup::create::newuserdata :", newuserdata);
             if (newuserdata) {
-                dispatch(login(newuserdata));
-                navigate("/")
+                const session = await authservice.login(data);
+                if (session) {
+                    const userdata = await authservice.getcurrentuser();
+                    if (userdata) {
+                        dispatch(login(userdata));
+
+                    }
+                    navigate("/");
+                }
             }
         } catch (error) {
             setError(error.message)
@@ -72,7 +78,7 @@ function Signup() {
                                 }
                             })}
                         />
-                            {/* ye sab value waha overwrite ho jayegi and jo waha nahi hao wo props me chala jayega spread ho ke an dregister me spread hi kar ke vejna parta hai
+                        {/* ye sab value waha overwrite ho jayegi and jo waha nahi hao wo props me chala jayega spread ho ke an dregister me spread hi kar ke vejna parta hai
 
                             email ke baad ek object aata hai to uske liye react-hook-form ka documentation padhna padega */}
 

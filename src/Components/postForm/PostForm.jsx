@@ -7,7 +7,6 @@ import RTE from '../RTE'
 import service from '../../Appwrite/configuration'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import logoimage from '../../assets/logoimage.png'
 
 
 function PostForm({ post }) {
@@ -28,14 +27,12 @@ function PostForm({ post }) {
     //TODO:  user hoga ya nahi check krna hoga
 
     const userdata = useSelector(state => state.auth.userdata)
+    
 
     const submit = async (data) => {
-
-        console.log("inside submit");
-
         if (post) {
-            console.log("old data:: ", post.Title, post.content, post.imageid, post.userid, post.status,);
-            console.log("new data:: ", data, data.title, data.slug, data.content, data.status);
+            // console.log("old data:: ", post.Title, post.content, post.imageid, post.userid, post.status,);
+            // console.log("new data:: ", data, data.title, data.slug, data.content, data.status);
 
 
             //file jo ki upload kar rahe hai
@@ -71,11 +68,14 @@ function PostForm({ post }) {
                     const fileid = uploadedFile.$id;
                     data.imageid = fileid;
                     // Create post with the file ID
+                    
                     const createpost = await service.createpost({
                         Title: data.title,
                         ...data,
                         userid: userdata.$id,
-                        name: userdata.name
+                        name: userdata.name,
+                        
+                        
                     });
                     if (createpost) {
                         navigate(`/post/${createpost.$id}`);
@@ -111,8 +111,6 @@ function PostForm({ post }) {
             subscription.unsubscribe()
         }
     }, [watch, slugtransform, setValue])
-
-    console.log("component::postform", userdata);
 
     return (
         <div>

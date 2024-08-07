@@ -21,7 +21,6 @@ function Editpost() {
     }
   }, [slug, navigate])
 
-  console.log("EditPost::", post);
   return post ? (
     <div className='py-8 '>
       <Container>

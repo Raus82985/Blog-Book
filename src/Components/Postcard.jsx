@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 function Postcard({ $id, title, imageid, content, flex="flex-row", bgcolor='bg-slate-300'}) {
-    console.log('Postcard props:', { $id, title, imageid }); // Debugging line
     const imageURL = service.getfilepreview(imageid);
-    console.log(imageURL);
 
     return (
         <div className='w-full'>

@@ -20,22 +20,13 @@ export class Authservice {
 
     //ab mere pas promise aayega to usko async and await se handel kar rahe hai
     async createaccount(email, password, name){        
-        try {
-            console.log("auth::createaccount::Line24:: ", email, password, {name});
-            
+        try {            
             //isme phale unique id then email and then password hi jata hai uske baad jo vejna hai vej do
             const useraccount = await this.account.create(ID.unique(), email, password, name)
-            if(useraccount){
                 //hear we will call another method that if user account created succefully then direct go inside the blog insted of login again
-                console.log("redirecting to login page");
-                console.log(email, password, name);
-                const user =  this.login({email, password});
-                return user;
-            }
-            else{
-                //else meant useraccount me kuch error aaya hoga to wahi return kar diye
+                //const user =  this.login({email, password});
                 return useraccount;
-            }
+            
         } catch (error) {
             console.log("Appwrite::auth::createaccount::", error);
         }
@@ -43,11 +34,9 @@ export class Authservice {
 
 
     async login({email, password}) {
-        try {
-            console.log("login function: auth:: ", email, password);
-            
+        try {            
             //see in documentation q ki hamesha ye change hota hai
-            const user = await this.account.createEmailPasswordSession(email, password);
+            const user = await this.account.createEmailPasswordSession(email, password);            
             return user;
         } catch (error) {
             console.log("Appwrite::auth::login::", error);
@@ -57,11 +46,9 @@ export class Authservice {
     async getcurrentuser(){
         try {
             const response =  await this.account?.get();
-            console.log(response);
             return response
         } catch (error) {
             console.log("Appwrite::auth::getcurrentuser::", error);
-
             return null
         }
     }

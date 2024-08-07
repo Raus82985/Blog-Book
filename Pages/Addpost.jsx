@@ -6,7 +6,6 @@ function Addpost() {
   return (
     <div className='py-8'>
       <Container>
-        {console.log("addpost is accessed")}
         <PostForm/>
       </Container>
     </div>

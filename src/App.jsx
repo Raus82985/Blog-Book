@@ -25,7 +25,6 @@ function App() {
         const userdata = await authservice.getcurrentuser();
         if (userdata) {
           dispatch(login({ userdata }));
-          console.log("User data", userdata);
         } else {
           dispatch(logout());
           console.log("No user data");

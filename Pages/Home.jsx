@@ -29,9 +29,7 @@ function Home() {
                         });
         
                         // Creation of map to keep it in store
-                        const userArray = Array.from(usermap, ([key, value]) => ({ key, value }));
-                        console.log('user ->', userArray);
-                        
+                        const userArray = Array.from(usermap, ([key, value]) => ({ key, value }));                        
                         dispatch(setUsers(userArray));
                     }
                 });
@@ -45,7 +43,6 @@ function Home() {
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };
-    // console.log("userrrrrrruserdata", userdata);
     
     if (posts.length === 0) {
         if(!loginstatus){

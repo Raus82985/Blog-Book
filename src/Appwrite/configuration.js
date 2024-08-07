@@ -21,9 +21,7 @@ export class Service {
     }
 
     async createpost({ Title, slug, content, imageid, userid, status, name}) {
-        try {
-            console.log("name -> ", name);
-            
+        try {            
             
             //go through documentation how to create document and what we need to pass
             return await this.databases.createDocument(
@@ -49,7 +47,6 @@ export class Service {
 
     //document id chaiye na jisko update karna hai to uske liye slug alag se pass kar rahe hai or abki sab chij alag
     async updatedpost(slug, { Title, content, imageid, status }) {
-        console.log("Inside update post", slug, Title, content, imageid, status);
         
         try {
             const updateddocument = await this.databases.updateDocument(
@@ -63,8 +60,6 @@ export class Service {
                     status,
                 }
             )
-
-            console.log("updated document:: ", slug, Title, content, imageid, status);
             return updateddocument;
             
         } catch (error) {
@@ -177,14 +172,11 @@ export class Service {
     //async ki need to nahi hai q ki ye direct value vejta hai (see in documentation)
 
     getfilepreview(imageid){
-        try {
-            console.log("getfilepreview", imageid);
-            
+        try {            
             const filepreview =  this.bucket.getFilePreview(
                 config.appwritebucketid,
                 imageid,
             )
-            console.log("check :: ",filepreview.href);
             return filepreview.href
             
         } catch (error) {
