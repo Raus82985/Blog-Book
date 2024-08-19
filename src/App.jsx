@@ -43,8 +43,11 @@ function App() {
 
   //ab agar loading ho raha to loading show hoga nahi to fir normal return hoga
   return loading ? (
-    <div className="flex justify-center bg-blue-100 items-center min-h-screen raus">
-      <h1 className="font-serif text-2xl">Loading...</h1>
+    <div className="flex flex-col justify-center bg-blue-100 items-center min-h-screen raus">
+      <div className='w-8 h-8 rounded-full border-t-4 border-blue-700 animate-spin'></div>
+      {/* <br />
+      <h1 className="font-serif text-2xl">Loading...</h1> */}
+
     </div>
   ) : (
     <div className='w-full bg-slate-100'>
