@@ -13,9 +13,10 @@ function Signup() {
     const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
     const [error, setError] = useState("");
+    const [loading, Setloading] = useState(false);
 
     const create = async (data) => {
-
+        Setloading(true)
         setError("")
         try {
             const newuserdata = await authservice.createaccount(data.email, data.password, data.name)
@@ -27,15 +28,22 @@ function Signup() {
                         dispatch(login(userdata));
 
                     }
+                    Setloading(false)
                     navigate("/");
                 }
             }
         } catch (error) {
+            Setloading(false)
             setError(error.message)
         }
     }
 
-    return (
+    return loading? (<div className="flex flex-col justify-center bg-blue-100 items-center min-h-screen raus">
+        <div className='w-8 h-8 rounded-full border-t-4 border-blue-700 animate-spin'></div>
+        {/* <br />
+        <h1 className="font-serif text-2xl">Loading...</h1> */}
+  
+      </div>) :(
         <div className="flex items-center justify-center">
             <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
                 <div className="mb-2 flex justify-center">

@@ -12,11 +12,13 @@ function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
+    const [ loading, Setloading ] = useState(false);
     const [error, setError] = useState("");
 
     const login = async (data) => {
         if(data){
             setError("");
+            Setloading(true)
         try {
             const session = await authservice.login(data);
             if (session) {
@@ -24,16 +26,23 @@ function Login() {
                 if (userdata) {
                     dispatch(authlogin(userdata));
                 }
+                Setloading(false);
                 navigate("/");
             }
         } catch (err) {
             // Handle cases where err might not be a string
+            Setloading(false)
             setError(err.message || "An error occurred. Please try again.");
         }
         }
     };
 
-    return (
+    return loading? (<div className="flex flex-col justify-center bg-blue-100 items-center min-h-screen raus">
+        <div className='w-8 h-8 rounded-full border-t-4 border-blue-700 animate-spin'></div>
+        {/* <br />
+        <h1 className="font-serif text-2xl">Loading...</h1> */}
+  
+      </div>) : (
         <div className='flex items-center justify-center w-full'>
             <div className='mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10'>
                 <div className='mb-2 flex justify-center'>
